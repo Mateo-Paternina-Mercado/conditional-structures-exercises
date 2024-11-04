@@ -1,70 +1,49 @@
-#El joven periodista Solarrabietas debe relatar un partido de tenis, pero no conoce las reglas del deporte. En particular, no ha logrado aprender cómo saber si un set ya terminó, y quién lo ganó.
+#Los tres lados a, b y c de un triángulo deben satisfacer la desigualdad triangular: cada uno de los lados no puede ser más largo que la suma de los otros dos.
 
-#Un partido de tenis se divide en sets. Para ganar un set, un jugador debe ganar 6 juegos, pero además debe haber ganado por lo menos dos juegos más que su rival. Si el set está empatado a 5 juegos, el ganador es el primero que llegue a 7. Si el set está empatado a 6 juegos, el set se define en un último juego, en cuyo caso el resultado final es 7-6.
+#Escriba un programa que reciba como entrada los tres lados de un triángulo, e indique:
 
-#Sabiendo que el jugador A ha ganado m juegos, y el jugador B, n juegos, al periodista le gustaría saber:
+#si acaso el triángulo es inválido; y
+#si no lo es, qué tipo de triángulo es.
+#Ingrese a: 3.9
+#Ingrese b: 6.0
+#Ingrese c: 1.2
+#No es un triangulo valido.
+#Ingrese a: 1.9
+#Ingrese b: 2
+#Ingrese c: 2
+#El triangulo es isoceles.
+#Ingrese a: 3.0
+#Ingrese b: 5.0
+#Ingrese c: 4.0
+#El triangulo es escaleno.
 
-#si A ganó el set, o
-#si B ganó el set, o
-#si el set todavía no termina, o
-#si el resultado es inválido (por ejemplo, 8-6 o 7-3).
-#Desarrolle un programa que solucione el problema de Solarrabietas:
-
-#Juegos ganados por A: 4
-#Juegos ganados por B: 5
-#Aun no termina
-#Juegos ganados por A: 5
-#Juegos ganados por B: 7
-#Gano B
-#Juegos ganados por A: 5
-#Juegos ganados por B: 6
-#Aun no termina
-#Juegos ganados por A: 3
-#Juegos ganados por B: 7
-#Invalido
-#Juegos ganados por A: 6
-#Juegos ganados por B: 4
-#Gano A
-
-def evaluar_set(juegos_A, juegos_B):
-    # Comprobar si el resultado es inválido
-    if juegos_A < 0 or juegos_B < 0 or (juegos_A > 7 and juegos_B > 6) or (juegos_B > 7 and juegos_A > 6):
-        return "Invalido"
+def tipo_triangulo(a, b, c):
+    # Verificar la desigualdad triangular
+    if a + b <= c or a + c <= b or b + c <= a:
+        return "No es un triángulo válido."
     
-    # Reglas del tenis para ganar un set
-    if juegos_A >= 6 and (juegos_A - juegos_B) >= 2:
-        return "Gano A"
-    elif juegos_B >= 6 and (juegos_B - juegos_A) >= 2:
-        return "Gano B"
-    
-    # Reglas para empate
-    if juegos_A == 6 and juegos_B == 6:
-        return "Aun no termina"
-    
-    # Si están empatados a 5
-    if juegos_A == 5 and juegos_B == 5:
-        return "Aun no termina"
-    
-    # Si se cumple la condición de que el set aún no ha terminado
-    if juegos_A < 6 and juegos_B < 6:
-        return "Aun no termina"
-    
-    # Si ninguna de las condiciones anteriores se cumple, se considera inválido
-    return "Invalido"
+    # Determinar el tipo de triángulo
+    if a == b == c:
+        return "El triángulo es equilátero."
+    elif a == b or a == c or b == c:
+        return "El triángulo es isósceles."
+    else:
+        return "El triángulo es escaleno."
 
-# Ciclo para ingresar los resultados
+# Solicitar los lados del triángulo
 while True:
     try:
-        juegos_A = int(input("Juegos ganados por A: "))
-        juegos_B = int(input("Juegos ganados por B: "))
-        
-        resultado = evaluar_set(juegos_A, juegos_B)
+        a = float(input("Ingrese a: "))
+        b = float(input("Ingrese b: "))
+        c = float(input("Ingrese c: "))
+
+        resultado = tipo_triangulo(a, b, c)
         print(resultado)
 
     except ValueError:
-        print("Por favor, ingrese números válidos.")
+        print("Por favor, ingrese valores numéricos válidos.")
     
     # Preguntar si desea continuar
-    continuar = input("¿Desea ingresar otro resultado? (s/n): ")
+    continuar = input("¿Desea ingresar otro triángulo? (s/n): ")
     if continuar.lower() != 's':
         break
