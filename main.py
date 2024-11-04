@@ -16,12 +16,14 @@
 #Recuerde que su programa debe entregar la solución correcta para cualquier combinación de números, no sólo para los ejemplos mostrados aquí.
 #Hay más de una manera de resolver cada ejercicio.
 
-# Solicitar al usuario que ingrese dos números
+# Solicitar al usuario que ingrese tres números
 numero1 = int(input("Enter number: "))
 numero2 = int(input("Enter number: "))
+numero3 = int(input("Enter number: "))
 
-# Ordenar los números y mostrarlos
-if numero1 < numero2:
-    print(numero1, numero2)
-else:
-    print(numero2, numero1)
+# Crear una lista con los números y ordenarla
+numeros = [numero1, numero2, numero3]
+numeros.sort()
+
+# Mostrar los números ordenados
+print(" ".join(map(str, numeros)))
