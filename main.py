@@ -1,63 +1,44 @@
-#Escriba un programa que simule una calculadora básica, este puede realizar operación de suma, resta, multiplicación y división.
-#El programa debe recibir como entrada 2 números reales y un operador, que puede ser +, -, * o /.
-#La salida del programa debe ser el resultado de la operación.
-#Operando: 3
-#Operador: +
-#Operando: 2
-#3 + 2 = 5
-#Operando: 6
-#Operador: -
-#Operando: 7
-#6 - 7 = -1
-#Operando: 4
-#Operador: *
-#Operando: 5
-#4 * 5 = 20
-#Operando: 10
-#Operador: /
-#Operando: 4
-#10 / 4 = 2.5
-#Operando: -1
-#Operador: **
-#Operando: 4
-#-1 ** 4 = 1
+#Escriba un programa que entregue la edad del usuario a partir de su fecha de nacimiento:
 
-# Función para realizar la operación
-def calculadora(operando1, operador, operando2):
-    if operador == '+':
-        return operando1 + operando2
-    elif operador == '-':
-        return operando1 - operando2
-    elif operador == '*':
-        return operando1 * operando2
-    elif operador == '/':
-        if operando2 != 0:
-            return operando1 / operando2
-        else:
-            return "Error: División por cero"
-    elif operador == '**':
-        return operando1 ** operando2
-    else:
-        return "Operador no válido"
+#Ingrese su fecha de nacimiento.
+#Dia: 14
+#Mes: 6
+#Anno: 1948
+#Usted tiene 62 annos
+#Por supuesto, el resultado entregado depende del día en que su programa será ejecutado.
 
-# Solicitar entradas al usuario
-while True:
-    try:
-        operando1 = float(input("Operating: "))
-        operador = input("Operator: ")
-        operando2 = float(input("Operating: "))
+#Para obtener la fecha actual, puede hacerlo usando la función localtime que viene en el módulo time. Los valores se obtienen de la siguiente manera (suponiendo que hoy es 11 de marzo de 2011):
 
-        resultado = calculadora(operando1, operador, operando2)
+#>>> from time import localtime
+#>>> t = localtime()
+#>>> t.tm_mday
+#11
+#>>> t.tm_mon
+#3
+#>>> t.tm_year
+#2011
+#El programa debe tener en cuenta si el cumpleaños ingresado ya pasó durante este año, o si todavía no ocurre.
 
-        if isinstance(resultado, str):
-            print(resultado)
-        else:
-            print(f"{operando1} {operador} {operando2} = {resultado}")
+from time import localtime
 
-    except ValueError:
-        print("Please enter valid numbers.")
+# Obtener la fecha actual
+t = localtime()
+dia_actual = t.tm_mday
+mes_actual = t.tm_mon
+anno_actual = t.tm_year
 
-    # Preguntar si desea continuar
-    continuar = input("Do you want to perform another operation? (s/n): ")
-    if continuar.lower() != 's':
-        break
+# Solicitar la fecha de nacimiento del usuario
+print("Enter your date of birth.")
+dia_nacimiento = int(input("Day: "))
+mes_nacimiento = int(input("Month: "))
+anno_nacimiento = int(input("Year: "))
+
+# Calcular la edad
+edad = anno_actual - anno_nacimiento
+
+# Ajustar la edad si el cumpleaños no ha pasado aún este año
+if (mes_actual < mes_nacimiento) or (mes_actual == mes_nacimiento and dia_actual < dia_nacimiento):
+    edad -= 1
+
+# Mostrar la edad del usuario
+print(f"you have {edad} years.")
