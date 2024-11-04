@@ -20,9 +20,10 @@
 numero1 = int(input("Enter number: "))
 numero2 = int(input("Enter number: "))
 numero3 = int(input("Enter number: "))
+numero4 = int(input("Enter number: "))
 
 # Crear una lista con los números y ordenarla
-numeros = [numero1, numero2, numero3]
+numeros = [numero1, numero2, numero3, numero4]
 numeros.sort()
 
 # Mostrar los números ordenados
