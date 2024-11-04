@@ -1,49 +1,35 @@
-#Los tres lados a, b y c de un triángulo deben satisfacer la desigualdad triangular: cada uno de los lados no puede ser más largo que la suma de los otros dos.
+def calcular_imc(peso, estatura):
+    """Calcula el índice de masa corporal (IMC)."""
+    return peso / (estatura ** 2)
 
-#Escriba un programa que reciba como entrada los tres lados de un triángulo, e indique:
-
-#si acaso el triángulo es inválido; y
-#si no lo es, qué tipo de triángulo es.
-#Ingrese a: 3.9
-#Ingrese b: 6.0
-#Ingrese c: 1.2
-#No es un triangulo valido.
-#Ingrese a: 1.9
-#Ingrese b: 2
-#Ingrese c: 2
-#El triangulo es isoceles.
-#Ingrese a: 3.0
-#Ingrese b: 5.0
-#Ingrese c: 4.0
-#El triangulo es escaleno.
-
-def tipo_triangulo(a, b, c):
-    # Verificar la desigualdad triangular
-    if a + b <= c or a + c <= b or b + c <= a:
-        return "No es un triángulo válido."
-    
-    # Determinar el tipo de triángulo
-    if a == b == c:
-        return "El triángulo es equilátero."
-    elif a == b or a == c or b == c:
-        return "El triángulo es isósceles."
+def evaluar_riesgo(edad, imc):
+    """Evalúa la condición de riesgo según la edad y el IMC."""
+    if edad < 45:
+        if imc < 22.0:
+            return "Riesgo bajo"
+        else:
+            return "Riesgo medio"
     else:
-        return "El triángulo es escaleno."
+        if imc < 22.0:
+            return "Riesgo medio"
+        else:
+            return "Riesgo alto"
 
-# Solicitar los lados del triángulo
-while True:
-    try:
-        a = float(input("Ingrese a: "))
-        b = float(input("Ingrese b: "))
-        c = float(input("Ingrese c: "))
+# Solicitar entradas al usuario
+try:
+    estatura = float(input("Ingrese su estatura en metros: "))
+    peso = float(input("Ingrese su peso en kilos: "))
+    edad = int(input("Ingrese su edad: "))
 
-        resultado = tipo_triangulo(a, b, c)
-        print(resultado)
-
-    except ValueError:
-        print("Por favor, ingrese valores numéricos válidos.")
+    # Calcular el IMC
+    imc = calcular_imc(peso, estatura)
     
-    # Preguntar si desea continuar
-    continuar = input("¿Desea ingresar otro triángulo? (s/n): ")
-    if continuar.lower() != 's':
-        break
+    # Evaluar el riesgo
+    riesgo = evaluar_riesgo(edad, imc)
+    
+    # Mostrar el resultado
+    print(f"Su IMC es: {imc:.2f}")
+    print(f"Condición de riesgo: {riesgo}")
+
+except ValueError:
+    print("Por favor, ingrese valores numéricos válidos.")
